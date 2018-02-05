@@ -3,19 +3,20 @@ var ctx, canvas, cellWidth, numCells;
 var rowVals = [];
 var rowNum = 0;
 var nextRowVals = [];
+var draw;
 
 // I have no idea why we need this now, I feel like we never needed it before:
 (function(window, document, undefined){
   window.onload = init;
     function init() {
-      numCells = 30;
+      numCells = 200;
       canvas = document.getElementById('canvas');
       console.log(canvas);
       ctx = canvas.getContext('2d');
       cellWidth = canvas.width / numCells;
 
       initializeVals();
-      setInterval(drawRow, 1000);
+      draw = setInterval(drawRow, 50);
 
     }
 })(window, document, undefined);
@@ -38,7 +39,7 @@ function drawRow() {
 
 function initializeVals() {
   for (var i=0; i < numCells; i++) {
-    if (i == 15) {
+    if (i == numCells/2) {
       rowVals.push(1);
     } else {
       rowVals.push(0);
@@ -77,6 +78,11 @@ function findNextRow() {
   nextRowVals = [];
   // Increase the row number:
   rowNum ++;
+
+  if (rowNum > numCells) {
+    clearInterval(draw);
+    console.log('done');
+  }
 }
 
 // Wait something is odd: we're going left to right when reading 0 up to 111, but the digits represent the opposite order... I mean in this case it doesn't matter because it's symmetric, but still:
