@@ -23,6 +23,7 @@ var nextRowVals = [];
 function drawRow() {
   // Draw current row:
   // Wow that was a silly mistake -- it's numCells, not numCells.length!
+
   for (var k=0; k < numCells; k++) {
     if (rowVals[k]) {
       ctx.fillStyle = 'black';
@@ -57,14 +58,14 @@ function findNextRow() {
     // console.log(byteDescription);
 
     if (rulesSet(byteDescription)) {
-      ctx.fillStyle = 'black';
+      // ctx.fillStyle = 'black';
       nextRowVals.push(1);
     } else {
-      ctx.fillStyle = 'lightgray';
+      // ctx.fillStyle = 'lightgray';
       nextRowVals.push(0);
     }
-    // ahh we forgot the all-important line:
-    ctx.fillRect(i * cellWidth, 5 + rowNum * cellWidth, cellWidth - 1, cellWidth - 1);
+    // ahh we forgot the all-important line. Wait but we're doing this in drawRow():
+    // ctx.fillRect(i * cellWidth, 5 + rowNum * cellWidth, cellWidth - 1, cellWidth - 1);
 
   }
   // because first and last element will always be 0:
@@ -72,8 +73,10 @@ function findNextRow() {
 
   // Save the new row vals for the next iteration to pick up on:
   rowVals = nextRowVals;
+  // This is the key, emptying this out:
+  nextRowVals = [];
   // Increase the row number:
-  rowNum++;
+  rowNum ++;
 }
 
 // Wait something is odd: we're going left to right when reading 0 up to 111, but the digits represent the opposite order... I mean in this case it doesn't matter because it's symmetric, but still:
