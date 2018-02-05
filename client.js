@@ -9,7 +9,7 @@ var draw;
 (function(window, document, undefined){
   window.onload = init;
     function init() {
-      numCells = 200;
+      numCells = 100;
       canvas = document.getElementById('canvas');
       console.log(canvas);
       ctx = canvas.getContext('2d');
@@ -31,7 +31,7 @@ function drawRow() {
     } else {
       ctx.fillStyle = 'lightgray';
     }
-    ctx.fillRect(k * cellWidth, 5 + rowNum * cellWidth, cellWidth - 1, cellWidth - 1);
+    ctx.fillRect(k * cellWidth, 5 + rowNum * cellWidth, cellWidth - 50 / numCells, cellWidth - 50 / numCells);
   }
 
   findNextRow();
@@ -39,7 +39,9 @@ function drawRow() {
 
 function initializeVals() {
   for (var i=0; i < numCells; i++) {
-    if (i == numCells/2) {
+    // if (i == numCells/2) {
+    // if (i % 3 == 0) {
+    if (Math.random() > 0.5) {
       rowVals.push(1);
     } else {
       rowVals.push(0);
@@ -90,6 +92,36 @@ function findNextRow() {
 function rulesSet(byte) {
   var res = 0;
   switch(byte) {
+    // Rule 190:
+    // case '000':
+    // break;
+    //
+    // case '001':
+    // break;
+    //
+    // case '010':
+    // res = 1;
+    // break;
+    //
+    // case '011':
+    // break;
+    //
+    // case '100':
+    // res = 1;
+    // break;
+    //
+    // case '101':
+    // res = 1;
+    // break;
+    //
+    // case '110':
+    // break;
+    //
+    // case '111':
+    // res = 1;
+    // break;
+
+    // Rule 30:
     case '000':
     break;
 
@@ -98,6 +130,7 @@ function rulesSet(byte) {
     break;
 
     case '010':
+    res = 1;
     break;
 
     case '011':
@@ -112,7 +145,6 @@ function rulesSet(byte) {
     break;
 
     case '110':
-    res = 1;
     break;
 
     case '111':
