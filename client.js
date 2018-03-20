@@ -39,9 +39,9 @@ function drawRow() {
 
 function initializeVals() {
   for (var i=0; i < numCells; i++) {
-    // if (i == numCells/2) {
+    if (i == numCells/2) {
     // if (i % 3 == 0) {
-    if (Math.random() > 0.5) {
+    // if (Math.random() > 0.5) {
       rowVals.push(1);
     } else {
       rowVals.push(0);
@@ -121,6 +121,8 @@ function rulesSet(byte) {
     // res = 1;
     // break;
 
+
+
     // Rule 30:
     case '000':
     break;
@@ -149,6 +151,39 @@ function rulesSet(byte) {
 
     case '111':
     break;
+
+
+
+    // Rule 90:
+  //   case '000':
+  //   break;
+  //
+  //   case '001':
+  //   res = 1;
+  //   break;
+  //
+  //   case '010':
+  //   break;
+  //
+  //   case '011':
+  //   res = 1;
+  //   break;
+  //
+  //   case '100':
+  //   res = 1;
+  //   break;
+  //
+  //   case '101':
+  //   break;
+  //
+  //   case '110':
+  //   res = 1;
+  //   break;
+  //
+  //   case '111':
+  //   break;
+
+
   }
   return res;
 }
