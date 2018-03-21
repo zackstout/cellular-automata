@@ -5,6 +5,16 @@ var rowNum = 0;
 var nextRowVals = [];
 var draw;
 
+function dec2bin(dec){
+    var bin = (dec >>> 0).toString(2);
+    while (bin.length < 8) {
+      bin = '0' + bin;
+    }
+    return bin;
+}
+
+console.log(dec2bin(30));
+
 // I have no idea why we need this now, I feel like we never needed it before:
 (function(window, document, undefined){
   window.onload = init;
@@ -123,7 +133,7 @@ function rulesSet(byte) {
 
 
 
-    // Rule 30:
+    // Rule 30 (00011110):
     case '000':
     break;
 
