@@ -15,18 +15,27 @@ function dec2bin(dec){
 
 console.log(dec2bin(30));
 
-// I have no idea why we need this now, I feel like we never needed it before:
+// I have no idea why we need this wrapper now, I feel like we never needed it before:
 (function(window, document, undefined){
   window.onload = init;
     function init() {
-      numCells = 100;
+      numCells = 1000;
       canvas = document.getElementById('canvas');
       console.log(canvas);
+
+      $('#sub').on('click', function() {
+        console.log($('#userIn').val());
+        console.log($('#cellsIn').val());
+        initializeVals();
+        clearInterval(draw);
+        // alter draw-speed here:
+        draw = setInterval(drawRow, 25);
+      });
+
       ctx = canvas.getContext('2d');
       cellWidth = canvas.width / numCells;
 
       initializeVals();
-      draw = setInterval(drawRow, 50);
 
     }
 })(window, document, undefined);
@@ -134,6 +143,37 @@ function rulesSet(byte) {
 
 
     // Rule 30 (00011110):
+    // case '000':
+    // break;
+    //
+    // case '001':
+    // res = 1;
+    // break;
+    //
+    // case '010':
+    // res = 1;
+    // break;
+    //
+    // case '011':
+    // res = 1;
+    // break;
+    //
+    // case '100':
+    // res = 1;
+    // break;
+    //
+    // case '101':
+    // break;
+    //
+    // case '110':
+    // break;
+    //
+    // case '111':
+    // break;
+
+
+
+    // Rule 90:
     case '000':
     break;
 
@@ -142,7 +182,6 @@ function rulesSet(byte) {
     break;
 
     case '010':
-    res = 1;
     break;
 
     case '011':
@@ -157,41 +196,11 @@ function rulesSet(byte) {
     break;
 
     case '110':
+    res = 1;
     break;
 
     case '111':
     break;
-
-
-
-    // Rule 90:
-  //   case '000':
-  //   break;
-  //
-  //   case '001':
-  //   res = 1;
-  //   break;
-  //
-  //   case '010':
-  //   break;
-  //
-  //   case '011':
-  //   res = 1;
-  //   break;
-  //
-  //   case '100':
-  //   res = 1;
-  //   break;
-  //
-  //   case '101':
-  //   break;
-  //
-  //   case '110':
-  //   res = 1;
-  //   break;
-  //
-  //   case '111':
-  //   break;
 
 
   }
