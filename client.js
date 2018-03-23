@@ -19,7 +19,7 @@ console.log(dec2bin(30));
 (function(window, document, undefined){
   window.onload = init;
     function init() {
-      numCells = 1000;
+      numCells = 10;
       canvas = document.getElementById('canvas');
       console.log(canvas);
 
@@ -30,13 +30,15 @@ console.log(dec2bin(30));
         // I thought maybe it was that it has to be an even number to see values.... but that wasn't it:
         // numCells = $('#cellsIn').val();
         // cellWidth = canvas.width / numCells;
+
+        // Clear everything out to prepare for re-draw:
         rowVals = [];
         rowNum = 0;
         nextRowVals = [];
         clearInterval(draw);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
+        // re-draw:
         initializeVals();
         // alter draw-speed here:
         draw = setInterval(drawRow, 25);
@@ -69,7 +71,7 @@ function drawRow() {
 function initializeVals() {
   for (var i=0; i < numCells; i++) {
     if (i == numCells/2) {
-    // if (i % 3 == 0) {
+    // if (i % 13 == 0) {
     // if (Math.random() > 0.5) {
       rowVals.push(1);
     } else {
@@ -87,18 +89,8 @@ function findNextRow() {
     byteDescription += rowVals[i];
     byteDescription += rowVals[i + 1];
 
-    // console.log(byteDescription);
-
-    if (rulesSet(byteDescription)) {
-      // ctx.fillStyle = 'black';
-      nextRowVals.push(1);
-    } else {
-      // ctx.fillStyle = 'lightgray';
-      nextRowVals.push(0);
-    }
-    // ahh we forgot the all-important line. Wait but we're doing this in drawRow():
-    // ctx.fillRect(i * cellWidth, 5 + rowNum * cellWidth, cellWidth - 1, cellWidth - 1);
-
+    // nice consolidation of if/else:
+    nextRowVals.push(rulesSet(byteDescription, 90));
   }
   // because first and last element will always be 0:
   nextRowVals.push(0);
@@ -110,16 +102,34 @@ function findNextRow() {
   // Increase the row number:
   rowNum ++;
 
+  // Stopping condition:
   if (rowNum > numCells) {
     clearInterval(draw);
     console.log('done');
   }
 }
 
+// Still not entirely clear on why the order has to be reversed:
+var allBytes = ['111', '110', '101', '100', '011', '010', '001', '000'];
 // Wait something is odd: we're going left to right when reading 0 up to 111, but the digits represent the opposite order... I mean in this case it doesn't matter because it's symmetric, but still:
 // Rule 90: 01011010
-function rulesSet(byte) {
-  var res = 0;
+function rulesSet(byte, rule) {
+  // console.log(byte);
+   var res = 0;
+
+  var binaryRule = dec2bin(rule);  // e.g. '01011010', which is 90, for the Triangle
+  // console.log(binaryRule);
+
+  // Looping through characters in our binaryRule:
+  // for (var i = 0; i < 8; i++) {
+  //   res = parseInt(binaryRule[i]);
+  //   console.log(res);
+  // }
+
+  console.log(parseInt(binaryRule.charAt(allBytes.indexOf(byte))));
+
+  res = parseInt(binaryRule.charAt(allBytes.indexOf(byte)));
+
   switch(byte) {
     // Rule 190:
     // case '000':
@@ -183,34 +193,34 @@ function rulesSet(byte) {
 
 
 
-    // Rule 90:
-    case '000':
-    break;
-
-    case '001':
-    res = 1;
-    break;
-
-    case '010':
-    break;
-
-    case '011':
-    res = 1;
-    break;
-
-    case '100':
-    res = 1;
-    break;
-
-    case '101':
-    break;
-
-    case '110':
-    res = 1;
-    break;
-
-    case '111':
-    break;
+    // Rule 90 (01011010):
+    // case '000':
+    // break;
+    //
+    // case '001':
+    // res = 1;
+    // break;
+    //
+    // case '010':
+    // break;
+    //
+    // case '011':
+    // res = 1;
+    // break;
+    //
+    // case '100':
+    // res = 1;
+    // break;
+    //
+    // case '101':
+    // break;
+    //
+    // case '110':
+    // res = 1;
+    // break;
+    //
+    // case '111':
+    // break;
 
 
   }
