@@ -26,8 +26,18 @@ console.log(dec2bin(30));
       $('#sub').on('click', function() {
         console.log($('#userIn').val());
         console.log($('#cellsIn').val());
-        initializeVals();
+        //why can't we set numCells in here? Even if we bring up the cellWidth setting?
+        // I thought maybe it was that it has to be an even number to see values.... but that wasn't it:
+        // numCells = $('#cellsIn').val();
+        // cellWidth = canvas.width / numCells;
+        rowVals = [];
+        rowNum = 0;
+        nextRowVals = [];
         clearInterval(draw);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+        initializeVals();
         // alter draw-speed here:
         draw = setInterval(drawRow, 25);
       });
