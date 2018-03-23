@@ -10,3 +10,5 @@ Thanks to Daniel Shiffman's [The Nature of Code](http://natureofcode.com/book/ch
 
 ## Getting Started:
 Clone or download this repo, then (right-clicking) open the index.html in the browser.
+
+Or try out the [live demo](https://zackstout.github.io/cellular-automata/).
