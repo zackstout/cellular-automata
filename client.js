@@ -14,8 +14,6 @@ function dec2bin(dec){
     return bin;
 }
 
-// console.log(dec2bin(30));
-
 // I have no idea why we need this wrapper now, I feel like we never needed it before:
 (function(window, document, undefined){
   window.onload = init;
@@ -25,10 +23,6 @@ function dec2bin(dec){
       console.log(canvas);
 
       $('#sub').on('click', function() {
-        console.log($('#userIn').val());
-        console.log($('#cellsIn').val());
-        //why can't we set numCells in here? Even if we bring up the cellWidth setting?
-        // I thought maybe it was that it has to be an even number to see values.... but that wasn't it:
         // Oooh i suspect the issue is failing to parseInt. Fool me once:
         numCells = parseInt($('#cellsIn').val()); // *does* have to be an even number, to work with current way of initializing values
         cellWidth = canvas.width / numCells;
