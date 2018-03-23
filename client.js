@@ -4,6 +4,7 @@ var rowVals = [];
 var rowNum = 0;
 var nextRowVals = [];
 var draw;
+var userRule;
 
 function dec2bin(dec){
     var bin = (dec >>> 0).toString(2);
@@ -13,13 +14,13 @@ function dec2bin(dec){
     return bin;
 }
 
-console.log(dec2bin(30));
+// console.log(dec2bin(30));
 
 // I have no idea why we need this wrapper now, I feel like we never needed it before:
 (function(window, document, undefined){
   window.onload = init;
     function init() {
-      numCells = 10;
+      // numCells = 200;
       canvas = document.getElementById('canvas');
       console.log(canvas);
 
@@ -28,9 +29,10 @@ console.log(dec2bin(30));
         console.log($('#cellsIn').val());
         //why can't we set numCells in here? Even if we bring up the cellWidth setting?
         // I thought maybe it was that it has to be an even number to see values.... but that wasn't it:
-        // numCells = $('#cellsIn').val();
-        // cellWidth = canvas.width / numCells;
-
+        // Oooh i suspect the issue is failing to parseInt. Fool me once:
+        numCells = parseInt($('#cellsIn').val()); // *does* have to be an even number, to work with current way of initializing values
+        cellWidth = canvas.width / numCells;
+        userRule = parseInt($('#userIn').val());
         // Clear everything out to prepare for re-draw:
         rowVals = [];
         rowNum = 0;
@@ -45,7 +47,7 @@ console.log(dec2bin(30));
       });
 
       ctx = canvas.getContext('2d');
-      cellWidth = canvas.width / numCells;
+      // cellWidth = canvas.width / numCells;
 
       initializeVals();
 
@@ -90,7 +92,7 @@ function findNextRow() {
     byteDescription += rowVals[i + 1];
 
     // nice consolidation of if/else:
-    nextRowVals.push(rulesSet(byteDescription, 90));
+    nextRowVals.push(rulesSet(byteDescription, userRule));
   }
   // because first and last element will always be 0:
   nextRowVals.push(0);
@@ -120,109 +122,10 @@ function rulesSet(byte, rule) {
   var binaryRule = dec2bin(rule);  // e.g. '01011010', which is 90, for the Triangle
   // console.log(binaryRule);
 
-  // Looping through characters in our binaryRule:
-  // for (var i = 0; i < 8; i++) {
-  //   res = parseInt(binaryRule[i]);
-  //   console.log(res);
-  // }
+  // console.log(parseInt(binaryRule.charAt(allBytes.indexOf(byte))));
 
-  console.log(parseInt(binaryRule.charAt(allBytes.indexOf(byte))));
-
+  // this is a huge condensation:
   res = parseInt(binaryRule.charAt(allBytes.indexOf(byte)));
 
-  switch(byte) {
-    // Rule 190:
-    // case '000':
-    // break;
-    //
-    // case '001':
-    // break;
-    //
-    // case '010':
-    // res = 1;
-    // break;
-    //
-    // case '011':
-    // break;
-    //
-    // case '100':
-    // res = 1;
-    // break;
-    //
-    // case '101':
-    // res = 1;
-    // break;
-    //
-    // case '110':
-    // break;
-    //
-    // case '111':
-    // res = 1;
-    // break;
-
-
-
-    // Rule 30 (00011110):
-    // case '000':
-    // break;
-    //
-    // case '001':
-    // res = 1;
-    // break;
-    //
-    // case '010':
-    // res = 1;
-    // break;
-    //
-    // case '011':
-    // res = 1;
-    // break;
-    //
-    // case '100':
-    // res = 1;
-    // break;
-    //
-    // case '101':
-    // break;
-    //
-    // case '110':
-    // break;
-    //
-    // case '111':
-    // break;
-
-
-
-    // Rule 90 (01011010):
-    // case '000':
-    // break;
-    //
-    // case '001':
-    // res = 1;
-    // break;
-    //
-    // case '010':
-    // break;
-    //
-    // case '011':
-    // res = 1;
-    // break;
-    //
-    // case '100':
-    // res = 1;
-    // break;
-    //
-    // case '101':
-    // break;
-    //
-    // case '110':
-    // res = 1;
-    // break;
-    //
-    // case '111':
-    // break;
-
-
-  }
   return res;
 }
