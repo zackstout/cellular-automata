@@ -1,7 +1,7 @@
 
 // Next steps:
 // Add picture of the rule in terms of mapping binary numbers 1 to 8 to booleans based on the binary representation of the rule
-// Change speed based on number of cells
+// Change speed based on number of cells (DONE)
 // A touch of styling
 // Let user change starting input! Most importantpart!
 
@@ -19,37 +19,41 @@ var allBytes = ['111', '110', '101', '100', '011', '010', '001', '000'];
 (function(window, document, undefined){
   window.onload = init;
     function init() {
-      // numCells = 200;
       canvas = document.getElementById('canvas');
-      console.log(canvas);
 
-      $('#sub').on('click', function() {
-        // Oooh i suspect the issue is failing to parseInt. Fool me once:
-        numCells = parseInt($('#cellsIn').val()); // *does* have to be an even number, to work with current way of initializing values
-        cellWidth = canvas.width / numCells;
-        userRule = parseInt($('#userIn').val());
-        // Clear everything out to prepare for re-draw:
-        rowVals = [];
-        rowNum = 0;
-        nextRowVals = [];
-        clearInterval(draw);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // re-draw:
-        initializeVals();
-        // alter draw-speed here:
-        draw = setInterval(drawRow, 5000/numCells);
+      // for pressing Enter:
+      $('body').keyup(function(event) {
+        if (event.keyCode == 13) {
+          submitClicked();
+        }
       });
 
+      $('#sub').on('click', submitClicked);
+
       ctx = canvas.getContext('2d');
-      // cellWidth = canvas.width / numCells;
 
       initializeVals();
-
     }
 })(window, document, undefined);
 
 
+function submitClicked() {
+  // Oooh i suspect the issue is failing to parseInt. Fool me once:
+  numCells = parseInt($('#cellsIn').val()); // *does* have to be an even number, to work with current way of initializing values
+  cellWidth = canvas.width / numCells;
+  userRule = parseInt($('#userIn').val());
+  // Clear everything out to prepare for re-draw:
+  rowVals = [];
+  rowNum = 0;
+  nextRowVals = [];
+  clearInterval(draw);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // re-draw:
+  initializeVals();
+  // alter draw-speed here:
+  draw = setInterval(drawRow, 4000/numCells);
+}
 
 function initializeVals() {
   for (var i=0; i < numCells; i++) {
