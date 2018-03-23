@@ -38,7 +38,7 @@ var allBytes = ['111', '110', '101', '100', '011', '010', '001', '000'];
         // re-draw:
         initializeVals();
         // alter draw-speed here:
-        draw = setInterval(drawRow, 25);
+        draw = setInterval(drawRow, 5000/numCells);
       });
 
       ctx = canvas.getContext('2d');
