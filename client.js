@@ -38,10 +38,20 @@ var allBytes = ['111', '110', '101', '100', '011', '010', '001', '000'];
 
 
 function submitClicked() {
+  $('#binaryRep').empty();
   // Oooh i suspect the issue is failing to parseInt. Fool me once:
   numCells = parseInt($('#cellsIn').val()); // *does* have to be an even number, to work with current way of initializing values
   cellWidth = canvas.width / numCells;
   userRule = parseInt($('#userIn').val());
+
+  // Draw binary representation of rule:
+  var binaryRep = dec2bin(userRule);
+  $('#binaryRep').append(userRule + " is " + binaryRep + " in binary notation.<br>");
+  for (var i=0; i < 8; i++) {
+    var bool = parseInt(binaryRep[i]) ? true : false;
+    $('#binaryRep').append(binaryRep[i] + ": " + allBytes[i] + " gets mapped to " + bool +  ".<br>");
+  }
+
   // Clear everything out to prepare for re-draw:
   rowVals = [];
   rowNum = 0;
