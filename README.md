@@ -4,6 +4,10 @@ I was enticed to begin playing with cellular automata by the fact that they can 
 
 Thanks to Daniel Shiffman's [The Nature of Code](http://natureofcode.com/book/chapter-7-cellular-automata/) for inspiring this animation. His chapter on cellular automata breathed the idea into me, but I developed the code myself.
 
+## Screenshot:
+![screen shot 2018-03-24 at 11 28 03 pm](https://user-images.githubusercontent.com/29472568/37871728-31d06ed8-2fbb-11e8-9f6d-3b4d37cc5550.png)
+
+
 ## Built With:
 - JavaScript
 - HTML canvas

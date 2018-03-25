@@ -4,6 +4,7 @@
 // Change speed based on number of cells (DONE)
 // A touch of styling
 // Let user change starting input! Most importantpart!
+// Let user choose color.
 
 var ctx, canvas, cellWidth, numCells;
 var rowVals = [];
@@ -46,7 +47,7 @@ function submitClicked() {
 
   // Draw binary representation of rule:
   var binaryRep = dec2bin(userRule);
-  $('#binaryRep').append(userRule + " is " + binaryRep + " in binary notation.<br>");
+  $('#binaryRep').append(userRule + " is " + binaryRep + " in binary notation.<br><br>");
   for (var i=0; i < 8; i++) {
     var bool = parseInt(binaryRep[i]) ? true : false;
     $('#binaryRep').append(binaryRep[i] + ": " + allBytes[i] + " gets mapped to " + bool +  ".<br>");
@@ -83,7 +84,7 @@ function drawRow() {
 
   for (var k=0; k < numCells; k++) {
     if (rowVals[k]) {
-      ctx.fillStyle = 'black';
+      ctx.fillStyle = 'blue';
     } else {
       ctx.fillStyle = 'lightgray';
     }
