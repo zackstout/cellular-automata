@@ -8,12 +8,11 @@
   </head>
   <body>
     <h1>Let's make some worlds from rows!</h1>
-    Rule 90 generates the Sierpinski triangle (so do rules 126 and 129 -- with a twist)! Rule 195 is also quite pleasing. <br><br>
-    Rule (between 1 and 255, which is 11111111 in binary): <input type="number" id="userIn"> <br>
-    <p id="binaryRep"></p>
-    Resolution (must be an even number): <input type="number" id="cellsIn"> <br>
-    <button id="sub">Draw</button>
-    <br>
+    <p style="text-align: center"> Rule 90 generates the Sierpinski triangle (so do rules 126, 129 and 161 -- with a twist)! Rule 195 is also quite pleasing.</p>
+    <p style="color: blue; margin-left: 50px"> Rule (between 1 and 255, which is 11111111 in binary): <input type="number" id="userIn"> </p>
+    <p id="binaryRep" style='color: orange; margin-left: 50px'></p>
+    <p style="color: blue; margin-left: 50px">Resolution (must be an even number): <input type="number" id="cellsIn"> </p>
+    <p><button id="sub">Draw</button></p>
     <!-- Well that solves the question of why it was taking so long to say "done": because height was 600: -->
     <canvas id="canvas" width="1000" height="1000"></canvas>
   </body>

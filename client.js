@@ -47,10 +47,11 @@ function submitClicked() {
 
   // Draw binary representation of rule:
   var binaryRep = dec2bin(userRule);
-  $('#binaryRep').append(userRule + " is " + binaryRep + " in binary notation.<br><br>");
+  $('#binaryRep').append("<span style='color: red'>" + userRule + "</span> is <span style='color: purple'>" + binaryRep + "</span> in binary notation.<br><br>");
   for (var i=0; i < 8; i++) {
     var bool = parseInt(binaryRep[i]) ? true : false;
-    $('#binaryRep').append(binaryRep[i] + ": " + allBytes[i] + " gets mapped to " + bool +  ".<br>");
+    var col = bool ? "green" : "pink";
+    $('#binaryRep').append("<span style='color: purple'>" + binaryRep[i] + "</span>: " + allBytes[i] + " gets mapped to <span style='color:" + col + "'>" + bool +  "</span>.<br>");
   }
 
   // Clear everything out to prepare for re-draw:
