@@ -1,0 +1,21 @@
+
+.info {
+  font-family: Georgia;
+  font-size: 18px;
+  color: darkGrey;
+}
+
+.cells {
+  color: turquoise;
+  font-size: 16px;
+}
+
+.rows {
+  color: tomato;
+  font-size: 16px;
+}
+
+.rules {
+  color: orange;
+  font-size: 16px;
+}

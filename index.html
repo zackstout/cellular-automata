@@ -5,14 +5,25 @@
     <title>Cellular Automata!</title>
     <script src="jquery.js" charset="utf-8"></script>
     <script src="client.js" charset="utf-8"></script>
+    <!-- Intersting, you can't put a slash in front of style.css: -->
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Let's make some worlds from rows!</h1>
-    <p style="text-align: center"> Rule 90 generates the Sierpinski triangle (so do rules 126, 129 and 161 -- with a twist)! Rule 195 is also quite pleasing.</p>
-    <p style="color: blue; margin-left: 50px"> Rule (between 1 and 255, which is 11111111 in binary): <input type="number" id="userIn"> </p>
+    <div style="margin-left: 50px; font-size 20px;">
+      <p class="info">The world is simple. It's made up of <span class='cells'>cells</span>, each of which is On or Off.</p>
+      <p class="info">Ok really, the world is composed of <span class='rows'>rows</span>.</p>
+      <p class="info">The <span class='cells'>cells</span> in each <span class='rows'>row</span> are determined by two things: (a) the previous <span class='rows'>row</span> and (b) the set of <span class='rules'>rules</span> we choose.</p>
+      <p class="info">Each <span class='rules'>rule</span> is encoded as a binary number between 0 and 255; this determines the values of the <span class='cells'>cells</span> in the next <span class='rows'>row</span> (On/Off).</p>
+      <p class="info">Each <span class='cells'>cell</span> in a new <span class='rows'>row</span> (ignoring the end-cells) is adjacent to three <span class='cells'>cells</span> in the previous <span class='rows'>row</span>.</p>
+      <p class="info">The values of those three <span class='cells'>cells</span> (On/Off) determine the value of the new <span class='cells'>cell</span>.</p>
+    </div>
+    <p style="margin-left: 50px" class="rules"> <b>Rule</b> (between 1 and 255, which is 11111111 in binary): <input type="number" id="userIn"> </p>
     <p id="binaryRep" style='color: orange; margin-left: 50px'></p>
-    <p style="color: blue; margin-left: 50px">Resolution (must be an even number): <input type="number" id="cellsIn"> </p>
-    <p><button id="sub">Draw</button></p>
+    <p style="color: blue; margin-left: 50px"> <b>Resolution</b> (must be an even number): <input type="number" id="cellsIn"> </p>
+    <p style="margin-left:100px"><button id="sub">Draw</button></p>
+    <p style="text-align: center; font-family: Garamandi; "> (<u>Hint</u>: Rule <span style="color: goldenrod; font-size: 20px;">90</span> generates the Sierpinski triangle (so do rules <span style="color: goldenrod; font-size: 20px;">126</span>, <span style="color: goldenrod; font-size: 20px;">129</span> and <span style="color: goldenrod; font-size: 20px;">161</span> -- with a twist)! Rule <span style="color: goldenrod; font-size: 20px;">195</span> is also quite pleasing.)</p>
+
     <!-- Well that solves the question of why it was taking so long to say "done": because height was 600: -->
     <canvas id="canvas" width="1000" height="1000"></canvas>
   </body>
