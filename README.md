@@ -11,6 +11,7 @@ Thanks to Daniel Shiffman's [The Nature of Code](http://natureofcode.com/book/ch
 ## Built With:
 - JavaScript
 - HTML canvas
+- jQuery
 
 ## Getting Started:
 Clone or download this repo, then (right-clicking) open the index.html in the browser.
