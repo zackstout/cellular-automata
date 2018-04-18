@@ -1,9 +1,8 @@
 
-// Next steps:
+// Next Steps:
 // Add picture of the rule in terms of mapping binary numbers 1 to 8 to booleans based on the binary representation of the rule
-// Change speed based on number of cells (DONE)
 // A touch of styling
-// Let user change starting input! Most importantpart!
+// Let user change starting input! Most important part!
 // Let user choose color.
 
 var ctx, canvas, cellWidth, numCells;
@@ -12,36 +11,33 @@ var rowNum = 0;
 var nextRowVals = [];
 var draw;
 var userRule;
-
-// Still not entirely clear on why the order has to be reversed:
 var allBytes = ['111', '110', '101', '100', '011', '010', '001', '000'];
 
-// I have no idea why we need this wrapper now, I feel like we never needed it before:
+// Initialize the canvas, add event handlers:
 (function(window, document, undefined){
   window.onload = init;
-    function init() {
-      canvas = document.getElementById('canvas');
+  function init() {
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
 
-      // for pressing Enter:
-      $('body').keyup(function(event) {
-        if (event.keyCode == 13) {
-          submitClicked();
-        }
-      });
+    // for pressing Enter:
+    $('body').keyup(function(event) {
+      if (event.keyCode == 13) {
+        submitClicked();
+      }
+    });
 
-      $('#sub').on('click', submitClicked);
+    $('#sub').on('click', submitClicked);
 
-      ctx = canvas.getContext('2d');
-
-      initializeVals();
-    }
+    initializeVals();
+  }
 })(window, document, undefined);
 
 
 function submitClicked() {
   $('#binaryRep').empty();
-  // Oooh i suspect the issue is failing to parseInt. Fool me once:
-  numCells = parseInt($('#cellsIn').val()); // *does* have to be an even number, to work with current way of initializing values
+  // Grab user input:
+  numCells = parseInt($('#cellsIn').val());
   cellWidth = canvas.width / numCells;
   userRule = parseInt($('#userIn').val());
 
@@ -61,17 +57,16 @@ function submitClicked() {
   clearInterval(draw);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // re-draw:
+  // Re-draw:
   initializeVals();
-  // alter draw-speed here:
+  // Alter draw-speed here:
   draw = setInterval(drawRow, 4000/numCells);
 }
 
 function initializeVals() {
   for (var i=0; i < numCells; i++) {
-    if (i == numCells/2) {
-    // if (i % 13 == 0) {
-    // if (Math.random() > 0.5) {
+    // Always start with one cell ON in the middle:
+    if (i == numCells/2) { // Other possible conditions: Math.random() > 0.5, i % 13 == 0, ...
       rowVals.push(1);
     } else {
       rowVals.push(0);
@@ -81,8 +76,6 @@ function initializeVals() {
 
 function drawRow() {
   // Draw current row:
-  // Wow that was a silly mistake -- it's numCells, not numCells.length!
-
   for (var k=0; k < numCells; k++) {
     if (rowVals[k]) {
       ctx.fillStyle = 'blue';
@@ -104,7 +97,6 @@ function findNextRow() {
     byteDescription += rowVals[i];
     byteDescription += rowVals[i + 1];
 
-    // nice consolidation of if/else:
     nextRowVals.push(rulesSet(byteDescription, userRule));
   }
   // because first and last element will always be 0:
@@ -125,9 +117,7 @@ function findNextRow() {
 }
 
 function rulesSet(byte, rule) {
-  // declare variable:
   var res = 0;
-
   var binaryRule = dec2bin(rule);  // e.g. '01011010', which is 90, for the Triangle
 
   // this is a huge condensation:
@@ -137,9 +127,11 @@ function rulesSet(byte, rule) {
 }
 
 function dec2bin(dec){
-    var bin = (dec >>> 0).toString(2);
-    while (bin.length < 8) {
-      bin = '0' + bin;
-    }
-    return bin;
+  // Thanks Stack Overflow:
+  var bin = (dec >>> 0).toString(2);
+  // Normalize all lengths to 8:
+  while (bin.length < 8) {
+    bin = '0' + bin;
+  }
+  return bin;
 }
