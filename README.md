@@ -8,7 +8,7 @@ Thanks to Daniel Shiffman's [The Nature of Code](http://natureofcode.com/book/ch
 ![screen shot 2018-03-24 at 11 28 03 pm](https://user-images.githubusercontent.com/29472568/37871728-31d06ed8-2fbb-11e8-9f6d-3b4d37cc5550.png)
 
 ## Animation:
-![gif](https://media.giphy.com/media/fHiC2bAA9Jutd4rPOk/giphy.gif)
+<img src="https://media.giphy.com/media/fHiC2bAA9Jutd4rPOk/giphy.gif" width="700px">
 
 ## Built With:
 - JavaScript
